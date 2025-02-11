@@ -23,5 +23,4 @@ public class DepartmentEntity {
     @OneToOne
     @JoinColumn(name = "department_manager")
     private EmployeeEntity manager;
-
 }

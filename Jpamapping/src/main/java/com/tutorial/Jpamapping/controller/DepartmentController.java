@@ -3,19 +3,21 @@ package com.tutorial.Jpamapping.controller;
 
 import com.tutorial.Jpamapping.entities.DepartmentEntity;
 import com.tutorial.Jpamapping.service.DepartmentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/departments")
 public class DepartmentController {
 
+//    @Autowired
     private final DepartmentService departmentService;
 
     public DepartmentController(DepartmentService departmentService) {
         this.departmentService = departmentService;
     }
 
-    @GetMapping("/{departmentID}")
+    @GetMapping("/{departmentId}")
     public DepartmentEntity getDepartmentById(@PathVariable Long departmentId) {
         return departmentService.getDepartmentById(departmentId);
     }
@@ -29,5 +31,10 @@ public class DepartmentController {
     public DepartmentEntity assignManagerToDepartment(@PathVariable Long departmentId,
                                                       @PathVariable Long employeeId) {
         return departmentService.assignManagerToDepartment(departmentId, employeeId);
+    }
+
+    @GetMapping(path = "/assignedDepartmentOfManager/{employeeId}")
+    public DepartmentEntity getAssignedDepartmentOfManager(@PathVariable Long employeeId) {
+        return  departmentService.getAssignedDepartmentOfManager(employeeId);
     }
 }
