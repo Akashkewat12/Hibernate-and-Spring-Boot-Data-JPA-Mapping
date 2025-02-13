@@ -1,13 +1,15 @@
 package com.tutorial.Jpamapping.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.Set;
 
 
 @Entity
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode(of = "id")
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="departments")
@@ -23,4 +25,7 @@ public class DepartmentEntity {
     @OneToOne
     @JoinColumn(name = "department_manager")
     private EmployeeEntity manager;
+
+    @OneToMany(mappedBy = "managerDepartment")
+    private Set<EmployeeEntity> workers;
 }

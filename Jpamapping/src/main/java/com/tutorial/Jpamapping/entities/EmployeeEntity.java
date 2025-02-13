@@ -1,15 +1,15 @@
 package com.tutorial.Jpamapping.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.tutorial.Jpamapping.repository.EmployeeRepository;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode(of = "id")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -27,4 +27,11 @@ public class EmployeeEntity {
     @OneToOne(mappedBy = "manager")
     @JsonIgnore
     private DepartmentEntity manageDepartment;
+
+    @ManyToOne
+    @JoinColumn(name="worker_department_id", referencedColumnName = "id")
+    private DepartmentEntity managerDepartment;
+
+    //@OneToMany
+    //private Set<EmployeeEntity> workers;
 }
